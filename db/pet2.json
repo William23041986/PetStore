@@ -1,0 +1,18 @@
+{
+  "id": 2012092886,
+  "category": {
+    "id": 1,
+    "name": "AX2345LORT"
+  },
+  "name": "Ventania",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 20210812,
+      "name": "data"
+    }
+  ],
+  "status": "sold"
+}
