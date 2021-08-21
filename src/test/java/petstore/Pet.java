@@ -1,3 +1,4 @@
+// 1 - Pacote
 package petstore;
 
 // 2 - Bibliotecas
@@ -16,9 +17,9 @@ import static org.hamcrest.Matchers.contains;
 // 3 - Classe
 public class Pet {
 //3.1 - Atributos
-    String uri ="https://petstore.swagger.io/v2/pet"; //endere√ßo da entidade Pet
+    String uri ="https://petstore.swagger.io/v2/pet"; //endereÁo da entidade Pet
 
-    // 3.2 - M√©todos e Fun√ß√µes
+    // 3.2 - MÈtodos e FunÁıes
     public String lerJson(String caminhoJson) throws IOException {
         return new String(Files.readAllBytes(Paths.get(caminhoJson)));
     }
@@ -27,12 +28,12 @@ public class Pet {
 
 
 
-    @Test //Identifica o m√©doto ou fun√ß√£o como um teste para o TesteNG
+    @Test(priority=1)  //Identifica o mÈdoto ou funÁ„o como um teste para o TesteNG
     public void incluirPet() throws IOException {
 String jsonBody = lerJson("db/pet1.json");
 
    // Sintaxe Gherkin
-   // Dado - Quanto - Ent√£o
+   // Dado - Quanto - Ent„o
    // Given - When - Then
 
         given() // Dado
@@ -41,18 +42,39 @@ String jsonBody = lerJson("db/pet1.json");
                 .body(jsonBody)
         .when() // Quanto
                 .post(uri)
-        .then() // Ent√£o
+        .then() // Ent„o
                 .log().all()
                 .statusCode(200)
                 .body("name", is("Ventania"))
                 .body("status", is("available"))
-                .body("category.name", is ("dog"))
-                .body("tags.name", contains("sta"))
+                .body("category.name", is ("AX2345LORT"))
+                .body("tags.name", contains("data"))
         ;
 
 
     }
 
+@Test(priority=2)
+    public void consultarPet(){
+        String petId = "2012092886";
+
+        String token =
+        given()
+                .contentType("application/json")
+                .log().all()
+        .when()
+                .get(uri + "/" + petId)
+        .then()
+                .log().all()
+                .statusCode(200)
+                .body("name", is("Ventania"))
+                .body("category.name", is("AX2345LORT"))
+                .body("status", is("available"))
+        .extract()
+                .path("category.name")
+        ;
+        System.out.println("o token È " + token);
+    }
 
 
 }
