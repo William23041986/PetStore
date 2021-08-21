@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.is;
 
 
 // 3 - Classe
@@ -42,6 +43,8 @@ String jsonBody = lerJson("db/pet1.json");
         .then() // Então
                 .log().all()
                 .statusCode(200)
+                .body("name", is("Ventania"))
+                .body("status", is("available"))
         ;
 
 
