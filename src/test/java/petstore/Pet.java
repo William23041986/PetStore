@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.contains;
 
 
 // 3 - Classe
@@ -45,6 +46,8 @@ String jsonBody = lerJson("db/pet1.json");
                 .statusCode(200)
                 .body("name", is("Ventania"))
                 .body("status", is("available"))
+                .body("category.name", is ("dog"))
+                .body("tags.name", contains("sta"))
         ;
 
 
